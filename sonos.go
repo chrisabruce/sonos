@@ -70,7 +70,12 @@ func (zp *ZonePlayer) SetVolume(level int) (error, bool) {
 }
 
 func (zp *ZonePlayer) CurrentTrackInfo() *TrackInfo {
-	_, res := zp.sendCommand(TRANSPORT_ENDPOINT, GET_CUR_TRACK_ACTION, GET_CUR_TRACK_BODY)
+	err, res := zp.sendCommand(TRANSPORT_ENDPOINT, GET_CUR_TRACK_ACTION, GET_CUR_TRACK_BODY)
+
+	if err != nil {
+		fmt.Printf("error: %v", err)
+		return nil
+	}
 
 	type XmlGetPositionInfoResponse struct {
 		XMLName       xml.Name `xml:"GetPositionInfoResponse"`
@@ -105,7 +110,7 @@ func (zp *ZonePlayer) CurrentTrackInfo() *TrackInfo {
 
 	e := new(XmlEnvelope)
 
-	err := xml.Unmarshal([]byte(res), &e)
+	err = xml.Unmarshal([]byte(res), &e)
 	if err != nil {
 		fmt.Printf("error: %v", err)
 		return nil
