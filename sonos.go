@@ -28,19 +28,24 @@ type ZonePlayer struct {
 }
 
 func (zp *ZonePlayer) Play() {
+	zp.sendCommand(RENDERING_ENDPOINT, PLAY_ACTION, PLAY_BODY)
 
+}
+
+func (zp *ZonePlayer) Pause() {
+	zp.sendCommand(RENDERING_ENDPOINT, PAUSE_ACTION, PAUSE_BODY)
 }
 
 func (zp *ZonePlayer) Stop() {
-
+	zp.sendCommand(RENDERING_ENDPOINT, STOP_ACTION, STOP_BODY)
 }
 
 func (zp *ZonePlayer) Next() {
-
+	zp.sendCommand(RENDERING_ENDPOINT, NEXT_ACTION, NEXT_BODY)
 }
 
 func (zp *ZonePlayer) Previous() {
-
+	zp.sendCommand(RENDERING_ENDPOINT, PAUSE_ACTION, PAUSE_BODY)
 }
 
 func (zp *ZonePlayer) GetVolume() int {
@@ -108,6 +113,8 @@ func (zp *ZonePlayer) CurrentTrackInfo() *TrackInfo {
 		Item    XmlItem  `xml:"item"`
 	}
 
+	fmt.Println(res)
+
 	e := new(XmlEnvelope)
 
 	err = xml.Unmarshal([]byte(res), &e)
@@ -121,6 +128,7 @@ func (zp *ZonePlayer) CurrentTrackInfo() *TrackInfo {
 	tmdXml = strings.Replace(tmdXml, "&gt;", ">", -1)
 	tmdXml = strings.Replace(tmdXml, "&lt;", "<", -1)
 
+	fmt.Println(tmdXml)
 	tmd := new(XmlTrackMetaData)
 	err = xml.Unmarshal([]byte(tmdXml), &tmd)
 	if err != nil {
