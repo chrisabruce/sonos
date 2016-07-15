@@ -28,24 +28,24 @@ type ZonePlayer struct {
 }
 
 func (zp *ZonePlayer) Play() {
-	zp.sendCommand(RENDERING_ENDPOINT, PLAY_ACTION, PLAY_BODY)
+	zp.sendCommand(TRANSPORT_ENDPOINT, PLAY_ACTION, PLAY_BODY)
 
 }
 
 func (zp *ZonePlayer) Pause() {
-	zp.sendCommand(RENDERING_ENDPOINT, PAUSE_ACTION, PAUSE_BODY)
+	zp.sendCommand(TRANSPORT_ENDPOINT, PAUSE_ACTION, PAUSE_BODY)
 }
 
 func (zp *ZonePlayer) Stop() {
-	zp.sendCommand(RENDERING_ENDPOINT, STOP_ACTION, STOP_BODY)
+	zp.sendCommand(TRANSPORT_ENDPOINT, STOP_ACTION, STOP_BODY)
 }
 
 func (zp *ZonePlayer) Next() {
-	zp.sendCommand(RENDERING_ENDPOINT, NEXT_ACTION, NEXT_BODY)
+	zp.sendCommand(TRANSPORT_ENDPOINT, NEXT_ACTION, NEXT_BODY)
 }
 
 func (zp *ZonePlayer) Previous() {
-	zp.sendCommand(RENDERING_ENDPOINT, PAUSE_ACTION, PAUSE_BODY)
+	zp.sendCommand(TRANSPORT_ENDPOINT, PAUSE_ACTION, PAUSE_BODY)
 }
 
 func (zp *ZonePlayer) GetVolume() int {
