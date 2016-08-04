@@ -157,6 +157,10 @@ func (zp *ZonePlayer) sendCommand(endPoint string, action string, body string) (
 	req.AddHeader("SOAPACTION", action)
 	res, err := req.Do()
 
+	if err != nil {
+		return err, ""
+	}
+
 	result, _ := res.Body.ToString()
 	return err, result
 }

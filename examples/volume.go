@@ -13,7 +13,7 @@ func main() {
 	zp := sonos.NewZonePlayer(SPEAKER_IP)
 	currentLevel := zp.GetVolume()
 
-	fmt.Println("Volume is %i", currentLevel)
+	fmt.Println("Volume is ", currentLevel)
 
 	currentLevel += 5
 	zp.SetVolume(currentLevel)
